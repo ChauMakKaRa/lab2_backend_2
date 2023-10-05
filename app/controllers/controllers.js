@@ -4,7 +4,7 @@ const Mongodb = require("../utils/utils");
 
 
 exports.create = async(req, res, next) => {
-    if(!req.body?.name) {
+    if(!req.body?. name) {
         return next(new MongoAPIError(400, "Name cannot be empty"));
     }
 
@@ -13,28 +13,29 @@ exports.create = async(req, res, next) => {
         const document = await contactService.create(req.body);
         return res.send(document);
     }catch (error) {
-        return next (new ApiError(500, "An error occurred while creating the contact"));
+        return next (new ApiError(500, "An error occurred while creating the contact create"));
     }
     
 };
 
 exports.findAll = async(req, res, next) => {
-    let document =[];
+    res.send('find All');
+    // let document =[];
 
-    try {
-        const contactService = new ContactService(Mongodb.client);
-        const {name} = req.query;
-        if(name) {
-            document = await contactService.findByName(name);
-        }else{
-            document = await contactService.find({});
-        }
-    }catch (error) {
-        return next(
-            new ApiError(500, "An error occurred while retrieving contacts")
-        );
-    }
-    return res.send(document);
+    // try {
+    //     const contactService = new ContactService(Mongodb.client);
+    //     const {name} = req.query;
+    //     if(name) {
+    //         document = await contactService.findByName(name);
+    //     }else{
+    //         document = await contactService.find({});
+    //     }
+    // }catch (error) {
+    //     return next(
+    //         new ApiError(500, "An error occurred while retrieving contacts findAll")
+    //     );
+    // }
+    // return res.send(document);
 };
 
 exports.findOne = async(req, res, next) => {
@@ -98,7 +99,7 @@ exports.findFavorite = async(req, res, next) => {
         return next(
             new ApiError(
                 500,
-                "an error occurred while retieving favorie contacts"
+                "an error occurred while retieving favorie contacts findFavorite"
             )
         );
     }
@@ -113,7 +114,7 @@ exports.deleteAll = async(req, res, next)=> {
         });
     }catch(error) {
         return next(
-            new ApiError(500, "An error occurred whi;e removing all contacts")
+            new ApiError(500, "An error occurred whiie removing all contacts deleteAll")
         );
     }
 };
