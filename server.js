@@ -1,11 +1,21 @@
-const express = require('express');
-const app = express();
-const port = 8000;
+const app = require("./app");
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-})
+const config = require("./app/config");
+const Mongodb = require("./app/utils/utils");
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-})
+async function startServer() {
+    try {
+        await Mongodb.connect(config.db.uri);
+        console.log("connected to the database");
+
+        const PORT = config.app.port;
+        app.listen(PORT, () => {
+            console.log(`Server is running on ${PORT}`);
+        });
+    }catch (error) {
+        console.log("cannot connectes to the database !", error);
+        process.exit();     
+    }
+}
+
+startServer();
