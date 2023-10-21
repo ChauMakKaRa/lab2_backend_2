@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const ApiError = require("./app/api-error");
-const contactsRouter = require('./app/routes/routes');
+const contactsRouter = require('./app/routes/contactRoute');
 const app = express();
 const bodyParser = require('body-parser');
 
